@@ -49,7 +49,7 @@ class RNFetchBlobFetchPolyfill {
         else if (typeof body !== 'object' && options.headers['Content-Type'] !== 'application/json')
           promise = Promise.resolve(JSON.stringify(body))
         else if (typeof body !== 'string')
-          promise = Promise.resolve(body.toString())
+          promise = Promise.resolve(body.toString(body instanceof Buffer ? 'base64' : 'utf8'));
         // send it as-is, leave the native module decide how to send the body.
         else
           promise = Promise.resolve(body)
